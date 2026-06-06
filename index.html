@@ -6,19 +6,29 @@
     <title>Lawrence Kofi Amoako | Premium Designer Portfolio</title>
     
     <!-- Favicon & Apple Touch Icons - Using your logo -->
-    <link rel="icon" type="image/png" sizes="32x32" href="my- logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="my- logo.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="my- logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="my-logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="my-logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="my-logo.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00f2fe">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="LKA Portfolio">
     
+    <!-- Bootstrap 5.3 CSS (Foundation only - custom styles override) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <!-- Cloudinary Upload Widget Script - Working URL -->
     <script src="https://upload-widget.cloudinary.com/2.1.15/global/all.js" type="text/javascript"></script>
     
     <style>
+        /* ============================================
+           YOUR ORIGINAL CUSTOM DESIGN - FULLY PRESERVED
+           Bootstrap does NOT override these styles
+        ============================================ */
+        
         /* Modern Premium Deep Variable Systems */
         :root {
             --bg-color: #030712;
@@ -31,6 +41,7 @@
             --accent-purple: #9d4edd;
             --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #9d4edd 100%);
             --danger: #ff4757;
+            --danger-dark: #e03a4a;
             --panel-border: rgba(255, 255, 255, 0.05);
             --panel-border-hover: rgba(0, 242, 254, 0.3);
             --carousel-bg: rgba(10, 15, 30, 0.8);
@@ -62,6 +73,7 @@
             --accent-purple: #6366f1;
             --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 60%, #6366f1 100%);
             --danger: #ef4444;
+            --danger-dark: #dc2626;
             --panel-border: rgba(15, 23, 42, 0.08);
             --panel-border-hover: rgba(14, 165, 233, 0.4);
             --carousel-bg: rgba(241, 245, 249, 0.8);
@@ -594,17 +606,31 @@
             margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
         }
 
+        /* ============================================
+           IMPROVED CAROUSEL - IMAGES FIT CONTAINER
+        ============================================ */
         .carousel-container {
-            position: relative; width: 100%; overflow: hidden;
-            border-radius: var(--radius-lg); background: var(--carousel-bg); border: 1px solid var(--panel-border);
-            backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            background: var(--carousel-bg);
+            border: 1px solid var(--panel-border);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
         .carousel-track {
             display: flex;
             transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             will-change: transform;
             width: 100%;
         }
+        
         .carousel-slide {
             min-width: 100%;
             width: 100%;
@@ -613,32 +639,150 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: clamp(1rem, 3vw, 2.5rem);
+            padding: 20px;
+            min-height: 400px;
         }
+        
         .carousel-slide img {
-            width: 100%;
+            width: auto;
+            max-width: 100%;
             height: auto;
-            max-height: clamp(300px, 60vh, 580px);
+            max-height: 450px;
             object-fit: contain;
             border-radius: var(--radius-md);
-            pointer-events: none;
+            display: block;
+            margin: 0 auto;
         }
-        .slide-actions { position: absolute; top: clamp(1.25rem, 3vw, 2rem); right: clamp(1.25rem, 3vw, 2rem); z-index: 10; }
         
-        .btn-delete {
-            background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25); 
-            width: clamp(38px, 5vw, 44px); height: clamp(38px, 5vw, 44px); border-radius: 12px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s ease;
+        /* Mobile adjustment */
+        @media (max-width: 768px) {
+            .carousel-slide img {
+                max-height: 300px;
+            }
+            .carousel-container {
+                min-height: 300px;
+            }
+            .carousel-slide {
+                min-height: 300px;
+            }
         }
-        .btn-delete:hover { background: #ef4444; color: #ffffff; border-color: transparent; transform: scale(1.05); }
-        .btn-delete svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+        
+        /* ============================================
+           MODERN ADVANCED DELETE BUTTON DESIGN
+        ============================================ */
+        .delete-btn-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+        }
+        
+        .modern-delete-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(239, 68, 68, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-delete-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        
+        .modern-delete-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .modern-delete-btn:hover {
+            background: var(--danger);
+            border-color: var(--danger);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+        
+        .modern-delete-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .modern-delete-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+            transition: transform 0.2s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .modern-delete-btn:hover svg {
+            transform: scale(1.05);
+        }
+        
+        /* Light theme adjustment */
+        [data-theme="light"] .modern-delete-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+        
+        [data-theme="light"] .modern-delete-btn svg {
+            stroke: #ef4444;
+        }
+        
+        [data-theme="light"] .modern-delete-btn:hover {
+            background: var(--danger);
+        }
+        
+        [data-theme="light"] .modern-delete-btn:hover svg {
+            stroke: white;
+        }
 
-        .carousel-nav { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; }
-        .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dot-inactive); cursor: pointer; transition: all 0.3s ease; }
-        .nav-dot.active { background: var(--accent); width: 28px; border-radius: 10px; }
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--dot-inactive);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background: var(--accent);
+            width: 28px;
+            border-radius: 10px;
+        }
 
-        .empty-state { padding: clamp(4rem, 10vw, 7rem) 1rem; text-align: center; color: var(--text-muted); width: 100%; }
+        .empty-state {
+            padding: clamp(4rem, 10vw, 7rem) 1rem;
+            text-align: center;
+            color: var(--text-muted);
+            width: 100%;
+        }
 
         .bento-contact {
             display: grid;
@@ -766,6 +910,29 @@
         .smart-scroll-trigger.at-bottom svg {
             transform: rotate(180deg);
         }
+        
+        /* ============================================
+           BOOTSTRAP OVERRIDE - YOUR STYLES TAKE PRIORITY
+        ============================================ */
+        /* Ensure Bootstrap doesn't override your card styles */
+        .card, .btn, .navbar {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Keep your navigation styles */
+        .navbar-nav .nav-link {
+            color: var(--text-muted) !important;
+        }
+        
+        /* Ensure your container styles work with Bootstrap */
+        .wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 4vw, 2.5rem);
+        }
     </style>
 </head>
 <body>
@@ -785,7 +952,7 @@
 
     <nav>
         <a href="#" class="logo-area">
-            <img src="my- logo.png" alt="LKA Design Logo" class="logo-img">
+            <img src="my-logo.png" alt="LKA Design Logo" class="logo-img">
             LKA DESIGN
         </a>
         <div class="nav-controls">
@@ -884,7 +1051,7 @@
                 </div>
             </div>
 
-            <div class="carousel-container">
+            <div class="carousel-container" id="carouselContainer">
                 <div class="carousel-track" id="carouselTrack"></div>
             </div>
             <div class="carousel-nav" id="carouselNav"></div>
@@ -955,6 +1122,9 @@
         </footer>
     </div>
 
+    <!-- Bootstrap JS Bundle (for optional components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
     // ============================================
     // DYNAMIC FOOTER YEAR
@@ -968,155 +1138,136 @@
     }
     
     // ============================================
-    // BACKEND API URL - UPDATE THIS FOR RENDER.COM
-    // When deployed to Render, change to: https://your-backend.onrender.com/api/images
-    // For local testing, use your computer's IP address
+    // BACKEND API URL
     // ============================================
-    const API_URL = ' https://portfolio-backend-pg.onrender.com/api/images';
+    const API_URL = 'https://portfolio-backend-pg.onrender.com/api/images';
     
     let uploadedImages = [];
     let uploadedImageIds = [];
     let currentCarouselIndex = 0;
+    
+    // AUTO-SCROLL VARIABLES
+    let autoScrollInterval = null;
+    const AUTO_SCROLL_DELAY = 4500;
 
-    // ============================================
-    // LOAD IMAGES FROM BACKEND (RUNS ON PAGE LOAD)
-    // ============================================
+    function startAutoScroll() {
+        if (autoScrollInterval) clearInterval(autoScrollInterval);
+        if (uploadedImages.length <= 1) return;
+        autoScrollInterval = setInterval(() => {
+            if (uploadedImages.length > 0) {
+                let nextIndex = (currentCarouselIndex + 1) % uploadedImages.length;
+                goToSlide(nextIndex);
+            }
+        }, AUTO_SCROLL_DELAY);
+    }
+    
+    function stopAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+            autoScrollInterval = null;
+        }
+    }
+    
+    function restartAutoScroll() {
+        stopAutoScroll();
+        startAutoScroll();
+    }
+
     async function loadImagesFromBackend() {
-        console.log('📡 Fetching images from backend...');
         try {
             const response = await fetch(API_URL);
-            if (!response.ok) throw new Error('Failed to fetch');
             const data = await response.json();
-            
-            console.log('✅ Received', data.length, 'images from database');
-            
             uploadedImageIds = data.map(item => item.id);
             uploadedImages = data.map(item => item.url);
-            
             renderCarousel();
             updateProjectCount();
+            startAutoScroll();
         } catch (error) {
-            console.error("❌ Error loading from database:", error);
+            console.error("Error loading:", error);
             uploadedImages = [];
             uploadedImageIds = [];
             renderCarousel();
         }
     }
 
-    // ============================================
-    // SAVE IMAGE URL TO BACKEND
-    // ============================================
     async function saveImageToBackend(imageUrl) {
-        console.log('💾 Saving image to backend...');
-        try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: imageUrl })
-            });
-            
-            if (response.ok) {
-                const savedImage = await response.json();
-                console.log('✅ Image saved to database, ID:', savedImage.id);
-                return true;
-            }
-            return false;
-        } catch (error) {
-            console.error("❌ Error saving to database:", error);
-            return false;
-        }
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: imageUrl })
+        });
+        return response.ok;
     }
 
-    // ============================================
-    // DELETE IMAGE FROM BACKEND
-    // ============================================
     async function deleteImageFromBackend(imageId, index) {
-        try {
-            const response = await fetch(`${API_URL}/${imageId}`, { method: 'DELETE' });
-            if (response.ok) {
-                uploadedImages.splice(index, 1);
-                uploadedImageIds.splice(index, 1);
-                renderCarousel();
-                updateProjectCount();
-                return true;
-            }
-            return false;
-        } catch (error) {
-            console.error("❌ Error deleting:", error);
-            return false;
+        await fetch(`${API_URL}/${imageId}`, { method: 'DELETE' });
+        uploadedImages.splice(index, 1);
+        uploadedImageIds.splice(index, 1);
+        if (currentCarouselIndex >= uploadedImages.length && uploadedImages.length > 0) {
+            currentCarouselIndex = uploadedImages.length - 1;
+        } else if (uploadedImages.length === 0) {
+            currentCarouselIndex = 0;
         }
+        renderCarousel();
+        updateProjectCount();
+        restartAutoScroll();
     }
 
-    // ============================================
-    // OPEN CLOUDINARY UPLOAD
-    // ============================================
     function openCloudinaryUpload() {
         if (uploadedImages.length >= 5) {
             alert("Maximum 5 images allowed.");
             return;
         }
-        
         if (typeof cloudinary === 'undefined') {
-            alert("Cloudinary widget still loading. Please wait...");
+            alert("Cloudinary widget still loading...");
             return;
         }
-        
-        const widget = cloudinary.createUploadWidget(
-            {
-                cloudName: "diqn01nx9",
-                uploadPreset: "portfolio_uploads",
-                sources: ['local', 'camera', 'google_drive'],
-                multiple: false,
-                cropping: false,
-                folder: 'portfolio_workspace',
-                clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-                maxFileSize: 5000000,
-                styles: {
-                    palette: {
-                        window: "#0f172a",
-                        sourceBg: "#1e293b",
-                        border: "#00f2fe",
-                        action: "#00f2fe",
-                        inactive: "#64748b"
-                    }
-                }
-            },
-            async (error, result) => {
-                if (error) {
-                    alert("Upload failed: " + (error.message || "Unknown error."));
-                    return;
-                }
-                
-                if (result && result.event === "success") {
-                    const imageUrl = result.info.secure_url;
-                    const saved = await saveImageToBackend(imageUrl);
-                    if (saved) {
-                        await loadImagesFromBackend();
-                        alert("✅ Image uploaded and saved to database!");
-                    } else {
-                        alert("Upload succeeded but failed to save to database.");
-                    }
+        stopAutoScroll();
+        const widget = cloudinary.createUploadWidget({
+            cloudName: "diqn01nx9",
+            uploadPreset: "portfolio_uploads",
+            sources: ['local', 'camera', 'google_drive'],
+            multiple: false,
+            cropping: false,
+            folder: 'portfolio_workspace',
+            clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+            maxFileSize: 5000000,
+            styles: {
+                palette: {
+                    window: "#0f172a",
+                    sourceBg: "#1e293b",
+                    border: "#00f2fe",
+                    action: "#00f2fe",
+                    inactive: "#64748b"
                 }
             }
-        );
+        }, async (error, result) => {
+            if (error) {
+                alert("Upload failed");
+                restartAutoScroll();
+                return;
+            }
+            if (result && result.event === "success") {
+                const saved = await saveImageToBackend(result.info.secure_url);
+                if (saved) {
+                    await loadImagesFromBackend();
+                    alert("✅ Image uploaded and saved!");
+                }
+            }
+            restartAutoScroll();
+        });
         widget.open();
     }
 
-    // ============================================
-    // DELETE IMAGE
-    // ============================================
-    async function deleteImage(index) {
+    window.deleteImage = async function(index) {
         if (!confirm("Remove this image? (Will be deleted from ALL devices)")) return;
         const imageId = uploadedImageIds[index];
         if (imageId) {
             await deleteImageFromBackend(imageId, index);
-            alert("✅ Image deleted from all devices!");
+            alert("✅ Image deleted!");
         }
-    }
+    };
     
-    // ============================================
-    // RENDER CAROUSEL
-    // ============================================
     function renderCarousel() {
         const track = document.getElementById('carouselTrack');
         const nav = document.getElementById('carouselNav');
@@ -1126,16 +1277,17 @@
             track.innerHTML = `<div class="carousel-slide"><div class="empty-state">✨ No images yet. Click "Upload to Cloud" — your work will be visible on all devices! ✨</div></div>`;
             nav.innerHTML = '';
             currentCarouselIndex = 0;
+            stopAutoScroll();
             return;
         }
         
         track.innerHTML = uploadedImages.map((img, idx) => `
             <div class="carousel-slide" data-index="${idx}">
                 <img src="${img}" alt="Portfolio work ${idx + 1}" loading="lazy">
-                <div class="slide-actions">
-                    <button class="btn-delete" onclick="deleteImage(${idx})" aria-label="Delete image">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-9 0v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V6H9z" stroke="currentColor" fill="none" stroke-width="2"/>
+                <div class="delete-btn-wrapper">
+                    <button class="modern-delete-btn" onclick="deleteImage(${idx})" aria-label="Delete image">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-9 0v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V6H9z"/>
                         </svg>
                     </button>
                 </div>
@@ -1150,8 +1302,20 @@
         if (trackEl) trackEl.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
         
         document.querySelectorAll('.nav-dot').forEach(dot => {
-            dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index)));
+            dot.addEventListener('click', () => {
+                stopAutoScroll();
+                goToSlide(parseInt(dot.dataset.index));
+                restartAutoScroll();
+            });
         });
+        
+        const carouselContainer = document.getElementById('carouselContainer');
+        if (carouselContainer) {
+            carouselContainer.onmouseenter = stopAutoScroll;
+            carouselContainer.onmouseleave = restartAutoScroll;
+            carouselContainer.ontouchstart = stopAutoScroll;
+            carouselContainer.ontouchend = restartAutoScroll;
+        }
         
         updateProjectCount();
     }
@@ -1160,26 +1324,12 @@
         if (index < 0) index = 0;
         if (index >= uploadedImages.length) index = uploadedImages.length - 1;
         if (index === currentCarouselIndex) return;
-        
         currentCarouselIndex = index;
         const track = document.getElementById('carouselTrack');
         if (track) track.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
-        
         document.querySelectorAll('.nav-dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentCarouselIndex);
         });
-    }
-
-    function nextSlide() {
-        if (uploadedImages.length > 0 && currentCarouselIndex < uploadedImages.length - 1) {
-            goToSlide(currentCarouselIndex + 1);
-        }
-    }
-
-    function prevSlide() {
-        if (uploadedImages.length > 0 && currentCarouselIndex > 0) {
-            goToSlide(currentCarouselIndex - 1);
-        }
     }
 
     function updateProjectCount() {
@@ -1188,51 +1338,29 @@
     }
 
     function clearAllImages() {
-        if (uploadedImages.length > 0 && confirm("Remove ALL images?")) {
+        if (uploadedImages.length > 0 && confirm("Delete ALL images? (One by one recommended)")) {
             alert("Please delete images one by one using the delete button.");
         }
     }
 
-    // ============================================
-    // FIXED SCROLL BUTTON - SCROLLS DOWN TO NEXT SECTION, THEN BACK TO TOP
-    // ============================================
     function setupScrollButton() {
         const scrollBtn = document.getElementById('scrollTrigger');
         if (!scrollBtn) return;
-        
-        // Show/hide button based on scroll position
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollBtn.classList.add('visible');
-            } else {
-                scrollBtn.classList.remove('visible');
-            }
-            
-            // Check if at bottom to rotate icon
+            if (window.scrollY > 300) scrollBtn.classList.add('visible');
+            else scrollBtn.classList.remove('visible');
             const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 50;
-            if (isAtBottom) {
-                scrollBtn.classList.add('at-bottom');
-            } else {
-                scrollBtn.classList.remove('at-bottom');
-            }
+            if (isAtBottom) scrollBtn.classList.add('at-bottom');
+            else scrollBtn.classList.remove('at-bottom');
         });
-        
-        // Trigger initial check
         window.dispatchEvent(new Event('scroll'));
-        
-        // Button click handler - Smart scroll (down to bottom, then back to top)
         scrollBtn.addEventListener('click', () => {
             const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 50;
-            
             if (isAtBottom) {
-                // At bottom - scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
-                // Not at bottom - scroll to next section
                 const sections = ['#about', '#services', '#projects', '#contact'];
                 let currentSectionIndex = -1;
-                
-                // Find which section is currently visible
                 for (let i = 0; i < sections.length; i++) {
                     const section = document.querySelector(sections[i]);
                     if (section) {
@@ -1243,38 +1371,32 @@
                         }
                     }
                 }
-                
-                // Scroll to next section or to bottom if no more sections
                 if (currentSectionIndex >= 0 && currentSectionIndex < sections.length - 1) {
                     const nextSection = document.querySelector(sections[currentSectionIndex + 1]);
-                    if (nextSection) {
-                        nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    } else {
-                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-                    }
+                    if (nextSection) nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    else window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                 } else if (currentSectionIndex === -1) {
-                    // If no section is currently visible, scroll to first section
                     const firstSection = document.querySelector(sections[0]);
                     if (firstSection) firstSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
-                    // At last section or no section found, scroll to bottom
                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                 }
             }
         });
     }
 
-    // ============================================
-    // SETUP FUNCTIONS
-    // ============================================
-    function setupUploadButton() {
-        const uploadBtn = document.getElementById('cloudinaryUploadBtn');
-        if (uploadBtn) uploadBtn.addEventListener('click', openCloudinaryUpload);
-    }
-
-    function setupClearAllButton() {
-        const clearBtn = document.getElementById('clearAll');
-        if (clearBtn) clearBtn.addEventListener('click', clearAllImages);
+    function setupSkillsAnimation() {
+        const skillsCard = document.getElementById('skillsCard');
+        if (!skillsCard) return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    skillsCard.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        observer.observe(skillsCard);
     }
 
     function setupScrollReveal() {
@@ -1287,47 +1409,18 @@
         sections.forEach(section => observer.observe(section));
     }
 
-    function setupKeyboardNavigation() {
-        document.addEventListener('keydown', (e) => {
-            if (uploadedImages.length === 0) return;
-            if (e.key === 'ArrowLeft') prevSlide();
-            if (e.key === 'ArrowRight') nextSlide();
-        });
-    }
-
-    function setupSkillsAnimation() {
-        const skillsCard = document.getElementById('skillsCard');
-        if (!skillsCard) return;
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    skillsCard.classList.add('animate');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        observer.observe(skillsCard);
-    }
-
     async function initPortfolio() {
         updateFooterYear();
         setupSkillsAnimation();
-        setupUploadButton();
-        setupClearAllButton();
         setupScrollReveal();
-        setupKeyboardNavigation();
-        setupScrollButton(); // Fixed scroll button with down then up functionality
-        
+        setupScrollButton();
+        document.getElementById('cloudinaryUploadBtn').addEventListener('click', openCloudinaryUpload);
+        document.getElementById('clearAll').addEventListener('click', clearAllImages);
         await loadImagesFromBackend();
         
         const savedTheme = localStorage.getItem('portfolio_theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
+        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+        else document.documentElement.setAttribute('data-theme', 'dark');
         
         const themeToggle = document.getElementById('themeToggleBtn');
         if (themeToggle) {
